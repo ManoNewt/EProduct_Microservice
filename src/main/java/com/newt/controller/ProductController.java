@@ -1,6 +1,12 @@
 package com.newt.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,8 +40,21 @@ public class ProductController {
 	}
 		
 	@RequestMapping(method = RequestMethod.GET)
-	public Iterable<Product> findAll() {
-		return productService.findAll();
+	public ResponseEntity<Map<?, ?>> findAll() {
+		Map<?,?> productDetails = null;
+		Map<Object, Object> errorMsgMap = new HashMap<>();
+		 try{
+			productDetails = productService.findAll();
+			if(productDetails == null || productDetails.isEmpty()){
+				errorMsgMap.put("ErrorMsg", "DataNotFound");
+				errorMsgMap.put("productDetails", new ArrayList<>());
+				return new ResponseEntity<Map<?, ?>>(errorMsgMap, HttpStatus.OK);
+			}
+		 }catch(Exception e){
+			 errorMsgMap.put("ErrorMsg", "InternalServerError"+e.getMessage());
+			 errorMsgMap.put("productDetails", new ArrayList<>());
+		 }
+		return new ResponseEntity<Map<?, ?>>(productDetails, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "post a product")

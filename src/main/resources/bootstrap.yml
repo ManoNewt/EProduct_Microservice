@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: my-application
+    
+  cloud:
+    vault:
+      token: c13d7bcc-64ed-896f-c0b5-e569963dce7b
+      scheme: http
+      generic:
+        enabled: false
+  jpa:
+    show-sql: true
+spring.cloud.vault:
+    mysql:
+        enabled: true
+        role: modify
+        backend: mysql
+        username-property: spring.datasource.username
+        password-property: spring.datasource.password
+spring.datasource.url: jdbc:mysql://52.207.0.161:3306/eproduct
+      

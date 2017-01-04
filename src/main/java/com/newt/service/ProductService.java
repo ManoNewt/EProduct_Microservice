@@ -1,13 +1,14 @@
 package com.newt.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.newt.model.Product;
 
 public interface ProductService {
 	public Product findByproductId(int productId);
 
-	public Iterable<Product> findAll();
+	public Map<String, List<Product>> findAll();
 
 	public Product save(Product products);
 

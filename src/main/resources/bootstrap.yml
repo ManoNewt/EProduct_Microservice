@@ -1,10 +1,12 @@
 spring:
   application:
-    name: my-application
+    name: product-details
     
   cloud:
     vault:
-      token: c13d7bcc-64ed-896f-c0b5-e569963dce7b
+      host: 52.207.0.161
+      port: 8200
+      token:  5d9a3e40-8f84-d913-2edb-66def3960b88
       scheme: http
       generic:
         enabled: false
